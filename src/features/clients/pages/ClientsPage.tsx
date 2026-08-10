@@ -16,7 +16,6 @@ import {
   clientStatusOptions,
   type ClientPlan,
   type ClientStatus,
-  type ClientPurpose,
 } from '../data/mockData';
 
 const PAGE_SIZE = 10;
@@ -26,13 +25,6 @@ const planBadge: Record<ClientPlan, string> = {
   Enterprise:   'bg-purple-50 text-purple-700 border border-purple-200',
   Professional: 'bg-blue-50 text-blue-700 border border-blue-200',
   Starter:      'bg-green-50 text-green-700 border border-green-200',
-};
-
-// ── Status badge ───────────────────────────────────────────────────────────────
-const statusBadge: Record<ClientStatus, string> = {
-  Active:   'bg-green-50 text-green-700 border border-green-200',
-  Inactive: 'bg-slate-100 text-slate-600 border border-slate-200',
-  Pending:  'bg-yellow-50 text-yellow-700 border border-yellow-200',
 };
 
 // ── Purpose badge ──────────────────────────────────────────────────────────────
@@ -65,7 +57,7 @@ export function ClientsPage() {
   const resetPage = () => setPage(1);
 
   // counts for summary pills
-  const counts = useMemo(() => ({
+  const counts = useMemo((): Record<ClientStatus, number> => ({
     Active:   clientsData.filter((c) => c.status === 'Active').length,
     Pending:  clientsData.filter((c) => c.status === 'Pending').length,
     Inactive: clientsData.filter((c) => c.status === 'Inactive').length,
